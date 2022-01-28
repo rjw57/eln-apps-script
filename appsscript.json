@@ -1,8 +1,18 @@
 {
   "timeZone": "Europe/London",
-  "dependencies": {},
+  "dependencies": {
+    "enabledAdvancedServices": [
+      {
+        "userSymbol": "Drive",
+        "version": "v2",
+        "serviceId": "drive"
+      }
+    ]
+  },
   "exceptionLogging": "STACKDRIVER",
   "oauthScopes": [
+    "profile",
+    "email",
     "https://www.googleapis.com/auth/script.container.ui",
     "https://www.googleapis.com/auth/drive",
     "https://www.googleapis.com/auth/docs"

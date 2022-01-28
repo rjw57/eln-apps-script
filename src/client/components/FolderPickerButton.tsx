@@ -1,8 +1,16 @@
 /// <reference types="@types/google.picker" />
 import React from 'react';
-import { gapi } from 'gapi-script';
 import Button from '@mui/material/Button';
+import { useAsync } from 'react-use';
+import { gapi } from 'gapi-script';
 import useOAuth2AccessToken from '../hooks/useOAuth2AccessToken';
+
+// Promise resolved when google.picker is loaded.
+const loadGooglePicker = new Promise<void>(resolve => {
+  gapi.load('picker', () => {
+    resolve();
+  });
+});
 
 interface Props extends React.ComponentProps<typeof Button> {
   onPick?: (result: google.picker.ResponseObject) => void;
@@ -10,18 +18,11 @@ interface Props extends React.ComponentProps<typeof Button> {
 }
 
 export default function FolderPickerButton({ onPick, pickerTitle, ...buttonProps }: Props) {
-  const accessToken = useOAuth2AccessToken();
-  const [pickerLoaded, setPickerLoaded] = React.useState(false);
-  const isReady = !!accessToken && pickerLoaded;
-
-  // Load Google drive picker API.
-  React.useEffect(() => {
-    gapi.load('picker', {
-      callback: () => {
-        setPickerLoaded(true);
-      },
-    });
-  }, [setPickerLoaded]);
+  const { data: accessToken, isLoading: isAccessTokenLoading } = useOAuth2AccessToken();
+  const { loading: isPickerLoading } = useAsync(async () => {
+    await loadGooglePicker;
+  });
+  const isReady = !isAccessTokenLoading && !isPickerLoading;
 
   // Handler for button click.
   function handleClick() {

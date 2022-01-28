@@ -32,7 +32,7 @@ const isProd = process.env.NODE_ENV === 'production';
 const destination = path.resolve(__dirname, 'dist');
 
 // define server paths
-const serverEntry = './src/server/index.js';
+const serverEntry = './src/server/index.ts';
 
 // define appsscript.json file path
 const copyAppscriptEntry = './appsscript.json';
@@ -44,9 +44,9 @@ const devDialogEntry = './dev/index.js';
 const clientEntrypoints = [
   {
     name: 'CLIENT - Index',
-    entry: './src/client/index-page/index.tsx',
-    filename: 'index-page', // we'll add the .html suffix to these
-    template: './src/client/index-page/index.html',
+    entry: './src/client/index.tsx',
+    filename: 'index', // we'll add the .html suffix to these
+    template: './src/client/index.html',
   },
 ];
 
