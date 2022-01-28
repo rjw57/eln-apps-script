@@ -1,3 +1,4 @@
+/// <reference types="@types/node" />
 import Server from 'gas-client';
 
 const { PORT } = process.env;

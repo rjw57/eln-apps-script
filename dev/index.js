@@ -19,7 +19,7 @@ const DevServer = () => {
         .then(response => {
           iframe.current.contentWindow.postMessage(
             { type: 'RESPONSE', id, status: 'SUCCESS', response },
-            `https://localhost:${PORT}`
+            `https://localhost:${PORT}`,
           );
         })
         .catch(err => {
@@ -30,7 +30,7 @@ const DevServer = () => {
               status: 'ERROR',
               response: err,
             },
-            `https://localhost:${PORT}`
+            `https://localhost:${PORT}`,
           );
         });
     };

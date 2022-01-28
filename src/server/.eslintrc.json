@@ -1,7 +1,14 @@
 {
   "root": true,
-  "parser": "babel-eslint",
-  "extends": ["airbnb-base", "plugin:prettier/recommended"],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "project": "./tsconfig.json"
+  },
+  "extends": [
+    "airbnb-base",
+    "airbnb-typescript/base",
+    "plugin:prettier/recommended"
+  ],
   "plugins": ["prettier", "googleappsscript"],
   "env": {
     "googleappsscript/googleappsscript": true

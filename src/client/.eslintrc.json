@@ -1,8 +1,9 @@
 {
   "root": true,
-  "parser": "babel-eslint",
+  "parser": "@typescript-eslint/parser",
   "extends": [
     "airbnb-base",
+    "airbnb-typescript/base",
     "plugin:prettier/recommended",
     "plugin:react/recommended"
   ],
@@ -21,7 +22,8 @@
     "sourceType": "module",
     "ecmaFeatures": {
       "jsx": true
-    }
+    },
+    "project": "./tsconfig.json"
   },
   "rules": {
     "prettier/prettier": "error",
