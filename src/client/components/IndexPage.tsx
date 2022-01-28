@@ -7,7 +7,6 @@ import Container from '@mui/material/Container';
 import Toolbar from '@mui/material/Toolbar';
 
 import FolderPickerButton from './FolderPickerButton';
-import FolderIdInput from './FolderIdInput';
 import AppBar from './AppBar';
 import useDriveAbout from '../hooks/useDriveAbout';
 
@@ -38,7 +37,7 @@ export default function IndexPage() {
       <Container sx={{ mt: 2 }}>
         <Box sx={{ display: 'flex' }}>
           <Box sx={{ flexGrow: 1, mr: 2 }}>
-            <FolderIdInput fullWidth textFieldProps={{ label: 'Root notebook folder' }} />
+            TODO: box
           </Box>
           <FolderPickerButton variant="outlined" pickerTitle="Select Folder">
             Select from Drive
