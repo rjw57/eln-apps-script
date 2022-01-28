@@ -21,11 +21,14 @@ export default function AppBar({ ...appBarProps }: Props) {
               ELN Manager
             </Typography>
           </Box>
-          <Box sx={{ flexGrow: 0 }}>
-            {!isDriveAboutLoading && driveAbout && (
+          {!isDriveAboutLoading && driveAbout && (
+            <Box sx={{ flexGrow: 0, display: 'flex', alignItems: 'center' }}>
               <Avatar alt={driveAbout.user.displayName} src={driveAbout.user.photoLink} />
-            )}
-          </Box>
+              <Typography noWrap component="div" sx={{ ml: 1 }}>
+                {driveAbout.user.emailAddress}
+              </Typography>
+            </Box>
+          )}
         </Toolbar>
       </Container>
     </MuiAppBar>

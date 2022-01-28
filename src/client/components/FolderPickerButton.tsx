@@ -34,6 +34,7 @@ export default function FolderPickerButton({ onPick, pickerTitle, ...buttonProps
       .addView(docsView)
       .enableFeature(google.picker.Feature.NAV_HIDDEN)
       .setOAuthToken(accessToken)
+      .setSize(800, 480)
       .setOrigin('https://script.google.com');
 
     if (pickerTitle) {
