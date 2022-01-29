@@ -7,7 +7,7 @@
     "email",
     "https://www.googleapis.com/auth/script.container.ui",
     "https://www.googleapis.com/auth/drive",
-    "https://www.googleapis.com/auth/docs"
+    "https://www.googleapis.com/auth/documents"
   ],
   "runtimeVersion": "V8",
   "webapp": {

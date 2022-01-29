@@ -9,11 +9,15 @@ import InputAdornment from '@mui/material/InputAdornment';
 import TextField from '@mui/material/TextField';
 import Toolbar from '@mui/material/Toolbar';
 
+import LoadingButton from '@mui/lab/LoadingButton';
+
 import ClearIcon from '@mui/icons-material/Clear';
+import SaveIcon from '@mui/icons-material/Save';
 
 import FolderPickerButton from './FolderPickerButton';
 import AppBar from './AppBar';
 import useDriveAbout from '../hooks/useDriveAbout';
+import server from '../utils/server';
 
 interface Folder {
   id: string;
@@ -29,6 +33,8 @@ export default function IndexPage() {
   const { data: driveAbout } = useDriveAbout();
   const [localState, setLocalState] = useLocalStorage<LocalState>('IndexPage', {});
   const [rootFolder, setRootFolder] = React.useState<Folder | undefined>();
+  const [isCreating, setIsCreating] = React.useState(false);
+  const [docUrl, setDocUrl] = React.useState<string | undefined>();
 
   const isReady = !!rootFolder;
 
@@ -53,6 +59,12 @@ export default function IndexPage() {
       rootFolder,
     }));
   }, [driveAbout, setLocalState, rootFolder]);
+
+  const handleCreate = async () => {
+    setIsCreating(true);
+    setDocUrl(await server.serverFunctions.createEntry(rootFolder.id));
+    setIsCreating(false);
+  };
 
   return (
     <>
@@ -103,9 +115,25 @@ export default function IndexPage() {
           </FolderPickerButton>
         </Box>
         <Box sx={{ display: 'flex', justifyContent: 'flex-end', mt: 2 }}>
-          <Button disabled={!isReady} autoFocus size="large" variant="contained">
-            Create document
-          </Button>
+          {docUrl && (
+            <Button href={docUrl} component="a" variant="contained" size="large" target="_blank">
+              Open document
+            </Button>
+          )}
+          {!docUrl && (
+            <LoadingButton
+              onClick={handleCreate}
+              disabled={!isReady}
+              autoFocus
+              size="large"
+              variant="contained"
+              loading={isCreating}
+              startIcon={<SaveIcon />}
+   loadingPosition="start"
+            >
+              Create document
+            </LoadingButton>
+          )}
         </Box>
       </Container>
     </>
